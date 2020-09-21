@@ -11,15 +11,23 @@
         android:layout_width="157dp"
         android:layout_height="95dp"
         android:text="Find Device Over Bluetooth"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="199dp" />
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="161dp" />
 
     <Button
         android:id="@+id/proximity"
         android:layout_width="157dp"
         android:layout_height="101dp"
         android:text="Check Proximity"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="338dp" />
+        tools:layout_editor_absoluteX="124dp"
+        tools:layout_editor_absoluteY="300dp" />
+
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="100"
+        android:layout_height="20dp"
+        android:text="OutPut"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="453dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
