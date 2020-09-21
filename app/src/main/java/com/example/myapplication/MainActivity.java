@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Button connect_ble_button = (Button) findViewById(R.id.connect_ble);
         final Button proximity_button = (Button) findViewById(R.id.proximity);
+        final TextView output = (TextView) findViewById(R.id.output);
+        output.setText("Hello");
 
     }
 }

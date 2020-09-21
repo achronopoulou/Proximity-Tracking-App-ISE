@@ -10,24 +10,48 @@
         android:id="@+id/connect_ble"
         android:layout_width="157dp"
         android:layout_height="95dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginLeft="123dp"
+        android:layout_marginTop="161dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        android:layout_marginBottom="44dp"
         android:text="Find Device Over Bluetooth"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="161dp" />
+        app:layout_constraintBottom_toTopOf="@+id/proximity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/proximity"
         android:layout_width="157dp"
         android:layout_height="101dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginLeft="124dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginRight="130dp"
+        android:layout_marginBottom="52dp"
         android:text="Check Proximity"
-        tools:layout_editor_absoluteX="124dp"
-        tools:layout_editor_absoluteY="300dp" />
+        app:layout_constraintBottom_toTopOf="@+id/output"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connect_ble" />
 
     <TextView
         android:id="@+id/output"
-        android:layout_width="100"
-        android:layout_height="20dp"
-        android:text="OutPut"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="453dp" />
+        android:layout_width="107dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="149dp"
+        android:layout_marginRight="149dp"
+        android:layout_marginBottom="253dp"
+        android:text="Output:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/proximity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
