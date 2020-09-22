@@ -16,17 +16,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean connected = false;
         final Button connect_ble_button = (Button) findViewById(R.id.connect_ble);
         final Button proximity_button = (Button) findViewById(R.id.proximity);
         final TextView output = (TextView) findViewById(R.id.output);
         output.setText("");
 
         connect_ble_button.setOnClickListener(new View.OnClickListener() {
-            output.setText("Connecting to Device");
+            @Override
+            public void onClick(View v) {
+                if (connected) {
+                    output.setText("Device Already Connected")
+                    //device already paired
+                } else {
+                    //connecting to device
+                }
+                output.setText("Device Connected!");
+            }
         });
 
         proximity_button.setOnClickListener(new View.OnClickListener() {
-            output.setText("Checking Proximity");
+            public void onClick(View v) {
+                if (connected) {
+                    //print distance
+                } else {
+                    //no connection exists connect to a device first
+                }
+                output.setText("Checking Proximity");
+            }
         });
     }
 }
