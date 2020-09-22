@@ -13,11 +13,11 @@ public class MainActivity extends AppCompatActivity {
     //comment
     //create a feature that initiates bluetooth, looks for a device, connects, and reports the distance
     //3 bags (same room (near), same home, and not in same building (far)
+    boolean connected = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        boolean connected = false;
         final Button connect_ble_button = (Button) findViewById(R.id.connect_ble);
         final Button proximity_button = (Button) findViewById(R.id.proximity);
         final TextView output = (TextView) findViewById(R.id.output);
@@ -26,9 +26,10 @@ public class MainActivity extends AppCompatActivity {
         connect_ble_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int random = (int)(Math.random() * 1 + 1);
+                int random = (int)(Math.random() * 1);
+                System.out.println(random);
                 if (connected) {
-                    output.setText("DEVICE ALREADY CONNECTED!")
+                    output.setText("DEVICE ALREADY CONNECTED!");
                     //device already paired
                 } else if (random == 0){
                     connected = true;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         proximity_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int random = (int)(Math.random() * 2 + 1);
+                int random = (int)(Math.random() * 2);
                 if (connected) {
                     if (random == 0) {
                         output.setText("THE TWO DEVICES ARE IN THE SAME ROOM.");
