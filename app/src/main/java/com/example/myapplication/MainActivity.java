@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Random;
 
 import android.os.Bundle;
 
@@ -25,24 +26,34 @@ public class MainActivity extends AppCompatActivity {
         connect_ble_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int random = (int)(Math.random() * 1 + 1);
                 if (connected) {
-                    output.setText("Device Already Connected")
+                    output.setText("DEVICE ALREADY CONNECTED!")
                     //device already paired
+                } else if (random == 0){
+                    connected = true;
+                    output.setText("DEVICE CONNECTED!");
                 } else {
-                    //connecting to device
+                    output.setText("DEVICE FAILED TO CONNECT - TRY AGAIN.");
                 }
-                output.setText("Device Connected!");
             }
         });
 
         proximity_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                int random = (int)(Math.random() * 2 + 1);
                 if (connected) {
-                    //print distance
+                    if (random == 0) {
+                        output.setText("THE TWO DEVICES ARE IN THE SAME ROOM.");
+                    } else if (random == 1) {
+                        output.setText("THE TWO DEVICES ARE NOT IN THE SAME HOUSE.");
+
+                    } else {
+                        output.setText("THE TWO DEVICES ARE IN THE SAME HOUSE - BUT NOT THE SAME ROOM.");
+                    }
                 } else {
-                    //no connection exists connect to a device first
+                    output.setText("DEVICE NOT CONNECTED. CONNECT DEVICE FIRST.");
                 }
-                output.setText("Checking Proximity");
             }
         });
     }
