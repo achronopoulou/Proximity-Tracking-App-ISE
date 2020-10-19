@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(context, "Bluetooth Enabled", duration);
             toast.show();
         }
-
         setContentView(R.layout.activity_main);
+
     }
 
     //connect two devices via BLE
