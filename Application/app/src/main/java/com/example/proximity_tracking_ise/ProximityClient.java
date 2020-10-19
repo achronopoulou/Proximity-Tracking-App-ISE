@@ -1,5 +1,7 @@
 package com.example.proximity_tracking_ise;
 
-public class ProximityClient {
+import android.app.Service;
+
+public class ProximityClient extends Service {
 
 }
