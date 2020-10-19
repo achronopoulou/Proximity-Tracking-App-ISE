@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //start the instance of the ble scan service in this method
         super.onCreate(savedInstanceState);
         //Check to see if bluetooth is enabled
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
