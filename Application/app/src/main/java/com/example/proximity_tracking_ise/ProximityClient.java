@@ -62,7 +62,7 @@ public class ProximityClient extends Service {
                 }
             }, SCAN_PERIOD);
             scanning = true;
-            //startScan(List<ScanFilter> filters, ScanSettings settings, ScanCallback callback) eventually for UUID 
+            //startScan(List<ScanFilter> filters, ScanSettings settings, ScanCallback callback) eventually for UUID
             bleScanner.startScan(leScanCallback);
         }
         scanning = false;
