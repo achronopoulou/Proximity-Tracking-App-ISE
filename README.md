@@ -8,6 +8,7 @@ Common Acronyms:
 
 
 ## Proximity Tracking App Software Design Overview
+
 ### Platform and Software Development Tools
 Designing this tool as a mobile app is a key part of allowing the research team to deploy the project with ease and scalability. Android appilications have a lower barrier of entry for deployment than IOS applications, which as why Android was choosen as the main platform for building the application. After building and deploying a prototype for Android devices, IOS can be explored by developing in Swift or a cross-platform mobile SDK like Flutter. 
 
@@ -29,18 +30,26 @@ Android App Implementations and toolkits that are similar in design and function
 * [Safer Illinois COVID Exposure Notification System](https://github.com/rokwire/safer-illinois-app/tree/develop/android/app/src/main/java/edu/illinois/covid/exposure)
 * [Google Exposure Notification API](https://developers.google.com/android/exposure-notifications/exposure-notifications-api)
 
-## BLE
+## BLE Overview
+Bluetooth Low Energy is an Android service that uses bluetooth to transfer small amounts of data in a significantly energy saving manner compared to classic bluetooth. In the context of developing the ISE Proximity Tracking app its Central vs. Peripheral allows for the transfer of information like recieved signal strength at high frequencies with low energy consumption. This makes it ideal for approximating proximity at very short intervals. 
+
+For developing the proximity capabilities the 
+
 Description and why we are using it and how we will use it 
-### Server
+## Server
 Desc of server, desc in context of this app, implementation of server, supportive materials
 
-### Client
+## Client
 Desc of client, desc in context of this app, implementation of client, supportive materials
 
-### RSSI
+## Background Service
+
+## Example Implementation
+
+## Approximating Proximity with RSS Information
 Desc of RSSI, in context to proximity, supportive materials
 
-#### Approximating Proximity
+### Proximity Approximation Algorithm and Implementation
 algo and implementation
 
 ## Overview of Hardware
@@ -51,6 +60,8 @@ collecting and storing data how to and algo
 
 ## Data Sharing (Email)
 how the team wants data shared, efficient ways to manage daata, possible solutions (CSV,google,db) algos
+
+## Implementing a Simple User Interface for Key Functionality
 
 ## Robustness
 ensuring that the app works in different scenarios, solutions and algos
