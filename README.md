@@ -1,4 +1,4 @@
-# Proximity-Tracking-App-ISE
+# ISE Proximity Tracking Android App Development Guide
 Proximity Tracking Android App for ISE Research
 
 
