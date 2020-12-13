@@ -4,7 +4,7 @@ Development guide for building a proximity tracking application using Java and A
 
 Common Acronyms:
 * BLE: Bluetooth Low Energy
-* RSS: Recieved Signal Strength
+* RSSI: Recieved Signal Strength
 
 
 ## Proximity Tracking App Software Design Overview
@@ -33,10 +33,11 @@ Android App Implementations and toolkits that are similar in design and function
 ## BLE Overview
 Bluetooth Low Energy is an Android service that uses bluetooth to transfer small amounts of data in a significantly energy saving manner compared to classic bluetooth. In the context of developing the ISE Proximity Tracking app its Central vs. Peripheral allows for the transfer of information like recieved signal strength at high frequencies with low energy consumption. This makes it ideal for approximating proximity at very short intervals. 
 
-For developing the proximity capabilities the 
+For developing the proximity capabilities the devices need to commuincate and the RSSI must be recorded. The RSSI indicates how strong the connection is between the two devices which can be used to approximate proximity. Intuitively the closer two devices are the stronger their connection. The further they are apart the weaker the connection. This is experienced in everyday life using headphones with mobile devices, or any bluetooth device. This can be utilized to approximate the distance between the two subjects.
 
-Description and why we are using it and how we will use it 
+By implementing a server and client service in the background of the app, continous connections can be made and proximity can be approximated.
 ## Server
+
 Desc of server, desc in context of this app, implementation of server, supportive materials
 
 ## Client
