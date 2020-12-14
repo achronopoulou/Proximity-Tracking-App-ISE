@@ -43,7 +43,13 @@ In a traditional device relationship the Android application would be the client
 The server will advertise its availability to the client over a UUID and wait for a connection before sharing requested materials. This means that the server device will always be open for connection and ready to share information. One user will be using the app as the server and will be waiting for periodic connections to the client to share RSS infromation.
 
 ### Server Implementation
-
+```java
+import android.app.Service;
+//Service allows for the server to run in the background of the application
+public class ProximityServer extends Service {
+    //can be permenantely running in the background
+}
+```
 implementation of server, supportive materials
 
 ## Client
@@ -80,10 +86,39 @@ Proximity Categories:
 * Not in the Same Household (3):  >10 m 
 
 Link to Reserach
+### Proximity Approximation Implementation
+```
+/*
+Returns an approximation of the proximity between the two devices in one of three categories.
+DEFINE THRESHOLD CONSTANTS for CATEGORZING:
+  double PROXIMITY_LB = 0.0;
+  double PROXIMITY_MB = 3.5;
+  double PROXIMITY_UB = 10.0;
+  if the two devices are in the same room...
+    Same Room: [PROXIMITY_LB,PROXIMITY_MB] -> return 1
+  if the two devices are in different rooms...
+    Different Room: [PROXIMITY_MB,PROXIMITY_UB] -> return 2
+  if the two devices are not in the same household...
+    Not in Same Household: > PROXIMITY_UB -> return 3
+@param rssi the retreived signal strength value from the two devices
+@param n the constant indicating environmental range between [2,4]
+@param mp the measured power value that approximates 1 meter (typically -69.0 dbm)
+@return the integer representing categorized proximity
+*/
 
-
-### Proximity Approximation Algorithm and Implementation
-algo and implementation
+public int approximate_proximity(double rssi, int n, double mp) {
+  double estimated_proximity = Math.pow(10,((mp-rssi)/(10.0*double(n))))
+  if (estimated_proximity > PROXIMITY_UB) {
+    return 3;
+  } else if (estimated_proximity > PROXIMITY_MB && estimated_proximity <= PROXIMITY_UB) {
+    return 2;
+  } else if (estimated_proximity >= PROXIMITY_LB && estimated_proximity <= PROXIMITY_MB) {
+    return 1;
+  } else {
+    return -1;
+  }
+}
+```
 
 ## All Together
 How does it all work together? Flow chart? 
