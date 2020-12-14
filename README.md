@@ -134,10 +134,13 @@ public class ProximityClient extends Service {
 ## Background Service
 The connection and retreval of RSSI data between the two applications is a task that must be performed a few times a minute, whether the user is or isn't directly on the application. To implement the capability to constantly check for proximity between the two devices and report the data a background service must be added to the application so that the scanning process of the client and constant adverstising process of the server are never stopped unless the application is terminated completely by the user.
 
-### Background Service Implementation
-
-How to implement
-CODE
+```xml
+<application ... >
+    <service android:name=".ProximityClient" />
+    <service android:name=".ProximityServer" />
+    ...
+</application>
+```
 ## Approximating Proximity with RSS Information
 Once the client, server, and background service are all tied together for communication and connection between the two devices the retrieved RSSI value can then be processed to approximate proximity. Many IOT reserachers and academics have developed different formulas for leveraging RSSI to approximate the distance between two devices, but before implementing these approximations there are a few key parameters to understand. 
 
