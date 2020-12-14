@@ -210,7 +210,37 @@ CODE
 ## Data Sharing (Email)
 Exporting the recorded data as a CSV and sharing it via an email account specified by the team is the preffered method of sharing data with the MAPS team. 
 how the team wants data shared, efficient ways to manage daata, possible solutions (CSV,google,db) algos
-CODE
+```java
+/*
+Function to parse data from ProximtyRecord objects into CSV and share via email.
+*/
+public void send_proximity_data_via_email() {
+  //Format data
+  String columnString =   "\"TIME\",\"PROXIMITY INTEGER\"";
+  String dataString   =   "\"" + .TIME +"\",\"" + ProximityRecord.PROXIMITY_CATEGORY;
+  String data = columnString + "\n" + dataString;
+
+  //Write CSV
+  File csv_file = null;
+  File root = Environment.getExternalStorageDirectory();
+  if (root.canWrite()){
+    File dir = new File (root.getAbsolutePath() + "/PROXIMITY_DATA" + ProximityRecord.TIME.toString());
+    dir.mkdirs();
+    file = new File(dir, "proximity_data.csv");
+    FileOutputStream out = null;
+    out = new FileOutputStream(file);
+    out.write(data.getBytes());
+    out.close();
+  }
+  Uri u1 = Uri.fromFile(file);
+  //Send Email
+  Intent sendIntent = new Intent(Intent.ACTION_SEND);
+  sendIntent.putExtra(Intent.EXTRA_SUBJECT, "PROXIMITY DATA");
+  sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
+  sendIntent.setType("text/html");
+  startActivity(sendIntent);
+}
+```
 ## Implementing a Simple User Interface for Key Functionality
 This applications mainly performs background tasks (client-server relationship, proximity approximation, data sharing) which don't require a lot of input from the users. Therefore a simple user-interface will suffice in building and deploying the application. There are a few key requirements in the user interace listed below.
 
