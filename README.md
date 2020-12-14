@@ -269,8 +269,7 @@ Typically an RSSI value of -26 would indicate the devices just inches apart and 
 * Measured Power: Approximation of 1 meter RSSI (-69 dbm)
 * N: Constant from [2,4] indicating the environmental range factor
 
-IMAGE
-RSSI Formula
+![Alt text](eq.png?raw=true "Proximity Equation")
 
 This formula on every scan will use the retrieved RSSI value and convert that signal strength to meters. 
 
@@ -281,7 +280,6 @@ Proximity Categories:
 * In the Same Household but NOT in the Same Room (2): 3.5-10 m
 * Not in the Same Household (3):  >10 m 
 
-Link to Reserach
 ### Proximity Approximation Implementation
 ```java
 /*
