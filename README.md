@@ -45,10 +45,131 @@ The server will advertise its availability to the client over a UUID and wait fo
 ### Server Implementation
 CODE
 ```java
-import android.app.Service;
 //Service allows for the server to run in the background of the application
 public class ProximityServer extends Service {
-    //can be permenantely running in the background
+  //can be running in the background
+
+  private BluetoothAdapter bluetoothAdapter;
+
+  private Advertising isAdvertising = new AtomicBoolean(false);
+  private AtomicBoolean waitBluetoothOn = new AtomicBoolean(false);
+
+  @Nullable
+  @Override
+  public IBinder onBind(Intent intent) {
+      return binder;
+  }
+
+  @Override
+  public void onCreate() {
+      systemService = getSystemService(Context.BLUETOOTH_SERVICE);
+      if (systemService instanceof BluetoothManager) {
+          bluetoothAdapter = ((BluetoothManager) systemService).getAdapter();
+      }
+      if (bluetoothAdapter == null) {
+          Log.d(TAG, "onCreate: bluetoothAdapter is null");
+          return;
+      }
+      IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+      registerReceiver(bluetoothReceiver, filter);
+  }
+
+  @Override
+  public int onStartCommand(Intent intent, int flags, int startId) { return START_STICKY;  }
+
+  @Override
+  public void onDestroy() {
+      stopAdvertising();
+      unregisterReceiver(bluetoothReceiver);
+  }
+
+  public void start() {
+      Log.d(TAG, "start server");
+
+      if (bluetoothAdapter == null) {
+          Log.d(TAG, "start - bluetoothAdapter is null");
+          return;
+      }
+
+      // ask for bluetooth if not set
+      if (!bluetoothAdapter.isEnabled()) {
+          if (callback != null)
+              callback.onRequestBluetoothOn();
+      }
+      startAdvertising();
+  }
+
+  public void stop() {
+      Log.d(TAG, "stop server");
+      stopAdvertising();
+  }
+
+  public void setCallback(Callback callback) {
+      this.callback = callback;
+  }
+
+  private void startAdvertising() {
+      BluetoothLeAdvertiser advertiser = bluetoothAdapter.getBluetoothLeAdvertiser();
+      //USE android 5.0
+      if (advertiser == null) {
+          Log.w(TAG, "Device does not support BLE advertisement");
+          return;
+      }
+      try {
+          AdvertiseSettings.Builder settingsBuilder = new AdvertiseSettings.Builder();
+          settingsBuilder.setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_BALANCED);
+          settingsBuilder.setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_MEDIUM);
+          settingsBuilder.setConnectable(true);
+          settingsBuilder.setTimeout(0);
+
+          ParcelUuid parceluuid = new ParcelUuid(Constants.EXPOSURE_UUID_SERVICE);
+          AdvertiseData.Builder dataBuilder = new AdvertiseData.Builder();
+          dataBuilder.setIncludeDeviceName(false);
+          dataBuilder.addServiceUuid(parceluuid);
+          dataBuilder.addServiceData(parceluuid, rpi);
+
+          AdvertiseSettings advertiseSettings = settingsBuilder.build();
+          AdvertiseData advertiseData = dataBuilder.build();
+          advertiser.startAdvertising(advertiseSettings, advertiseData, advertiseCallback);
+      }
+  }
+
+  private void stopAdvertising() {
+      showToast("Exposure: DEVICE FOUND PROXIMITY CHECK");
+      waitBluetoothOn.set(false);
+      if (bluetoothAdapter != null) {
+          BluetoothLeAdvertiser advertiser = bluetoothAdapter.getBluetoothLeAdvertiser();
+          if (advertiser != null) {
+              advertiser.stopAdvertising(advertiseCallback);
+          }
+      }
+  }
+
+  };
+
+
+  private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
+      @Override
+      public void onReceive(Context context, Intent intent) {
+          final String action = intent.getAction();
+
+          if ((action != null) && action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+              final int bluetoothState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+              if (bluetoothState == BluetoothAdapter.STATE_ON) {
+                  Log.d(TAG, "Bluetooth is on");
+                  //start the advertising if it waits for bluetooth
+                  Handler handler = new Handler(Looper.getMainLooper());
+                  Runnable runnable = () -> {
+                      if (waitBluetoothOn.get()) {
+                          startAdvertising();
+                      }
+                  };
+                  handler.postDelayed(runnable, 2000);
+              }
+          }
+      }
+  };
+
 }
 ```
 implementation of server, supportive materials
