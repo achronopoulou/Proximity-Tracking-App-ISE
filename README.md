@@ -87,7 +87,7 @@ Proximity Categories:
 
 Link to Reserach
 ### Proximity Approximation Implementation
-```
+```java
 /*
 Returns an approximation of the proximity between the two devices in one of three categories.
 DEFINE THRESHOLD CONSTANTS for CATEGORZING:
