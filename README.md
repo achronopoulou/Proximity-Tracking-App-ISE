@@ -314,9 +314,6 @@ public int approximate_proximity(double rssi, int n, double mp) {
 }
 ```
 
-## All Together
-How does it all work together? Flow chart? 
-IMAGE
 ## Overview of Hardware
 Certain older Android devices do not support both advertising and scanning for BLE. BLE as stated above is more of an efficient practice for cokllecting RSS packets. Older devices that do not support BLE would require a classic bluetooth server/client implementation to collect RSS data. The implementation therefore would be different for the scanning and advertising, but calculations related to estimating proximity would remain the same. A classic bluetooth implementation would use significantly more battery, and therefore not be recommended as this app is designed to work throughout the day as the subject moves around. Purchasing and deplpoying on newer models is recommended for this reason. Any device with bluetooth 5 should suffice.
 
@@ -388,6 +385,10 @@ public void send_proximity_data_via_email() {
   startActivity(sendIntent);
 }
 ```
+
+## Putting it All Together (Diagram)
+![Alt text](diagram.png?raw=true "App Flow")
+
 ## Implementing a Simple User Interface for Key Functionality
 This applications mainly performs background tasks (client-server relationship, proximity approximation, data sharing) which don't require a lot of input from the users. Therefore a simple user-interface will suffice in building and deploying the application. There are a few key requirements in the user interface listed below. These can easily be implemented using the UI builder in Android Studio which will autogenerate the code for you in the main activity.
 
@@ -395,7 +396,7 @@ This applications mainly performs background tasks (client-server relationship, 
 * Data Export and Sharing: Share button for toggling email function that will export and share data.
 * Failure to Connect Selection: Selection of devices to connect to when searching for BL device.
 
-## Robustness
+## Improvements
 
 ### Device Dying During Scan Cycles
 THere is a possibility of the user's device dying during the scan cycle which would trigger the onDestroy() function in the different features, similar to if the application was manually destroyed. However, in this case it was unintentionally and the data for the day is still being collected. When an Android devices battery reaches 0.5% the onDestroy() function is called, therefore a features should be implemented in the onDestroy function to automatically share current data. If the app is being initiated in a time of day where data was already shared then it should pick up from where it left off, and if not then it should start a new day of proximity sensing for cycles. Indicators can be used to sense low battery in advance and prevent against that. 
