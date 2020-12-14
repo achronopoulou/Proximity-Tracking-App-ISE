@@ -23,7 +23,7 @@ Core features that are necessary to successfully developing this application inc
   * Recieving RSSI
 * Constant Streaming
 * Approximating Proximity
-* Store and Sharing Results
+* Storing and Sharing Results
 
 ### Similar Implementations
 Android App Implementations and toolkits that are similar in design and functionality to the goals of this apolication are the Safer-Illinois COVID Exposure Notification feature and Google Exposure Notification API. Both of these examples are designed specifically for COVID-19 exposure notifications, so they don't connect devices based on UUID (one to one connection) but rather attempt to connect with any advertising device. This means that these implementations can't be used directly for building this application, but are a great reference for understanding how BLE can be leveraged for proximity between devices.
