@@ -36,23 +36,38 @@ Bluetooth Low Energy is an Android service that uses bluetooth to transfer small
 For developing the proximity capabilities the devices need to commuincate and the RSSI must be recorded. The RSSI indicates how strong the connection is between the two devices which can be used to approximate proximity. Intuitively the closer two devices are the stronger their connection. The further they are apart the weaker the connection. This is experienced in everyday life using headphones with mobile devices, or any bluetooth device. This can be utilized to approximate the distance between the two subjects.
 
 By implementing a server and client service in the background of the app, continous connections can be made and proximity can be approximated.
-## Server
 
-Desc of server, desc in context of this app, implementation of server, supportive materials
+In a traditional device relationship the Android application would be the client and the device it is connecting to (watch, heart rate monitor, headphone, etc.) would be the server. In the context of tracking proximity between the two devices selection must take place for server vs client. 
+
+## Server
+The server will advertise its availability to the client over a UUID and wait for a connection before sharing requested materials. This means that the server device will always be open for connection and ready to share information. One user will be using the app as the server and will be waiting for periodic connections to the client to share RSS infromation.
+
+### Server Implementation
+
+implementation of server, supportive materials
 
 ## Client
-Desc of client, desc in context of this app, implementation of client, supportive materials
+The client will be the other device which is actively searching to make a connetion with a server device and request/recieve information regarding RSS. The device that is selected to be the client will follow a cycle of seraching for the server, requesting/recieving RSSI if connected and restarting the cycle for the next iteration. The client can then approximate proximity and share data.
+
+### Client Implementation
+implementation of client, supportive materials
 
 ## Background Service
+The connection and retreval of RSSI data between the two applications is a task that must be performed a few times a minute, whether the user is or isn't directly on the application. To implement the capability to constantly check for proximity between the two devices and report the data a background service must be added to the application so that the scanning process of the client and constant adverstising process of the server are never stopped unless the application is terminated completely by the user.
 
-## Example Implementation
+### Background Service Implementation
+
+How to implement
 
 ## Approximating Proximity with RSS Information
+Once the client, server, and background service are all tied together for communication and connection between the two devices the retrieved RSSI value can then be processed to 
 Desc of RSSI, in context to proximity, supportive materials
 
 ### Proximity Approximation Algorithm and Implementation
 algo and implementation
 
+## All Together
+How does it all work together? Flow chart? 
 ## Overview of Hardware
 Certain older Android devices do not support both advertising and scanning for BLE. BLE as stated above is more of an efficient practice for cokllecting RSS packets. Older devices that do not support BLE would require a classic bluetooth server/client implementation to collect RSS data. The implementation therefore would be different for the scanning and advertising, but calculations related to estimating proximity would remain the same. A classic bluetooth implementation would use significantly more battery, and therefore not be recommended as this app is designed to work throughout the day as the subject moves around. Purchasing and deplpoying on newer models is recommended for this reason. Any device with bluetooth 5 should suffice.
 
