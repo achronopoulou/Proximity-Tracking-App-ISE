@@ -212,7 +212,7 @@ Exporting the recorded data as a CSV and sharing it via an email account specifi
 how the team wants data shared, efficient ways to manage daata, possible solutions (CSV,google,db) algos
 ```java
 /*
-Function to parse data from ProximtyRecord objects into CSV and share via email.
+Function to parse data from ProximityRecord objects into CSV and share via email.
 */
 public void send_proximity_data_via_email() {
   //Format data
