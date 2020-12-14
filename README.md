@@ -288,7 +288,7 @@ THere is a possibility of the user's device dying during the scan cycle which wo
 
 CODE
 ### Failure to Connect
-If the devices fail to connect over UUID a self selection can be used to identify the server device. This would basically allow for hte user to connect to a device and remember the server device for futher connection. This would specifically be used if the UUID is not functioning correctly in identifying a device.
+If the devices fail to connect over UUID a self selection can be used to identify the server device. This would basically allow for the user to connect to a device and remember the server device for futher connection. This would specifically be used if the UUID is not functioning correctly in identifying a device.
 
 CODE
 
