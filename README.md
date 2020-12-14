@@ -60,27 +60,64 @@ The connection and retreval of RSSI data between the two applications is a task 
 How to implement
 
 ## Approximating Proximity with RSS Information
-Once the client, server, and background service are all tied together for communication and connection between the two devices the retrieved RSSI value can then be processed to 
-Desc of RSSI, in context to proximity, supportive materials
+Once the client, server, and background service are all tied together for communication and connection between the two devices the retrieved RSSI value can then be processed to approximate proximity. Many IOT reserachers and academics have developed different formulas for leveraging RSSI to approximate the distance between two devices, but before implementing these approximations there are a few key parameters to understand. 
+
+Typically an RSSI value of -26 would indicate the devices just inches apart and an RSSI value of -100 would indicate they are over 40 meters apart. Using the paramters and formula below RSSI can be used to estimate the meters between the two devices.
+
+* RSSI: Recieved Signal Strength Indicator [-100,-30] dbm
+* Measured Power: Approximation of 1 meter RSSI (-69 dbm)
+* N: Constant from [2,4] indicating the environmental range factor
+
+RSSI Formula
+
+This formula on every scan will use the retrieved RSSI value and convert that signal strength to meters. 
+
+The MAPS reserach team specified to categorize the proximity metrics and report the specific category in the data. Using the retreived RSSI the calculated proximity can be placed in one of three categories and recorded in the data.
+
+Proximity Categories: 
+* In the Same Room (1): 0-3.5 m
+* In the Same Household but NOT in the Same Room (2): 3.5-10 m
+* Not in the Same Household (3):  >10 m 
+
+Link to Reserach
+
 
 ### Proximity Approximation Algorithm and Implementation
 algo and implementation
 
 ## All Together
 How does it all work together? Flow chart? 
+
 ## Overview of Hardware
 Certain older Android devices do not support both advertising and scanning for BLE. BLE as stated above is more of an efficient practice for cokllecting RSS packets. Older devices that do not support BLE would require a classic bluetooth server/client implementation to collect RSS data. The implementation therefore would be different for the scanning and advertising, but calculations related to estimating proximity would remain the same. A classic bluetooth implementation would use significantly more battery, and therefore not be recommended as this app is designed to work throughout the day as the subject moves around. Purchasing and deplpoying on newer models is recommended for this reason. Any device with bluetooth 5 should suffice.
 
 ## Data Collection
-collecting and storing data how to and algo 
+After proximity is estimated and categorized two key pieces should be saved in the apps internal data, and later exported as CSV for the research team. The timestamp of when the proximity was recorded and the integer value specifying which category the proximity value belongs to. This can be implemented by storing the data into an array initiaized in the MainActivity, and writing the structure to a CSV at the end of the collection period. 
+
+
+
 
 ## Data Sharing (Email)
+Exporting the recorded data as a CSV and sharing it via an email account specified by the team is the preffered method of sharing data with the MAPS team. 
 how the team wants data shared, efficient ways to manage daata, possible solutions (CSV,google,db) algos
 
 ## Implementing a Simple User Interface for Key Functionality
+This applications mainly performs background tasks (client-server relationship, proximity approximation, data sharing) which don't require a lot of input from the users. Therefore a simple user-interface will suffice in building and deploying the application. There are a few key requirements in the user interace listed below.
 
+* Toggle for Selecting Server vs Client
+* Data Export and Sharing
+* Failure to Connect Selection
+
+
+Backend Implementation
 ## Robustness
-ensuring that the app works in different scenarios, solutions and algos
+
+### Device Dying During Scan Cycles
+THere is a possibility of the user's device dying during the scan cycle which would trigger the onDestroy() function in the different features, similar to if the application was manually destroyed. However, in this case it was unintentionally and the data for the day is still being collected. When an Android devices battery reaches 0.5% the onDestroy() function is called, therefore a features should be implemented in the onDestroy function to automatically share current data. If the app is being initiated in a time of day where data was already shared then it should pick up from where it left off, and if not then it should start a new day of proximity sensing for cycles. Indicators can be used to sense low battery in advance and prevent against that. 
+
+### Failure to Connect
+If the devices fail to connect over UUID a self selection can be used to identify the server device. This would basically allow for hte user to connect to a device and remember the server device for futher connection. This would specifically be used if the UUID is not functioning correctly in identifying a device.
+
 
 ## Conclusion
-conclusion aobut how the 
+The implementation for the MAPS Proxmity Tracking application should be constructed as outlined above. This guide can serve as a useful tool for developers tackling this project. Deviations of course will be made in implementing the application for other devices, but the basic outline of background services, BLE server/client communication, and RSSI based proximity estimation should be used.
