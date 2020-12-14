@@ -206,7 +206,37 @@ Certain older Android devices do not support both advertising and scanning for B
 ## Data Collection
 After proximity is estimated and categorized two key pieces should be saved in the apps internal data, and later exported as CSV for the research team. The timestamp of when the proximity was recorded and the integer value specifying which category the proximity value belongs to. This can be implemented by storing the data into an array initiaized in the MainActivity, and writing the structure to a CSV at the end of the collection period. 
 
-CODE
+The timestamp and proximity category can be stored in an object.
+```java
+/*
+Class for storing proximity data after a successful scan.
+Stores the time of the scan as a java.SQL.Time object and proximity of the subjects as the categorized integer.
+*/
+public class ProximityRecord {
+  //These are unique to each ProximityRecord
+  private Time time_recorded;
+  private int proximity_category;
+  
+  public ProximityRecord(Time t, int record) {
+    time_recorded = t;
+    proximity_category = record;
+  }
+
+  public int get_proximity_category() {
+    return proximity_category;
+  }
+
+  public Time get_time_of_scan() {
+    return time_recorded;
+  }
+}
+```
+
+After creating an object and storying the successful scan, and array of the object can be used to store data throughout the day.
+
+```java
+ProximityRecord[] proximity_records; 
+```
 ## Data Sharing (Email)
 Exporting the recorded data as a CSV and sharing it via an email account specified by the team is the preffered method of sharing data with the MAPS team. 
 how the team wants data shared, efficient ways to manage daata, possible solutions (CSV,google,db) algos
