@@ -285,8 +285,9 @@ CODE
 
 ### Device Dying During Scan Cycles
 THere is a possibility of the user's device dying during the scan cycle which would trigger the onDestroy() function in the different features, similar to if the application was manually destroyed. However, in this case it was unintentionally and the data for the day is still being collected. When an Android devices battery reaches 0.5% the onDestroy() function is called, therefore a features should be implemented in the onDestroy function to automatically share current data. If the app is being initiated in a time of day where data was already shared then it should pick up from where it left off, and if not then it should start a new day of proximity sensing for cycles. Indicators can be used to sense low battery in advance and prevent against that. 
-
-CODE
+```xml
+android.intent.action.BATTERY_LOW
+```
 ### Failure to Connect
 If the devices fail to connect over UUID a self selection can be used to identify the server device. This would basically allow for the user to connect to a device and remember the server device for futher connection. This would specifically be used if the UUID is not functioning correctly in identifying a device.
 ```java
