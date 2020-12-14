@@ -353,7 +353,6 @@ ProximityRecord[] proximity_records;
 ```
 ## Data Sharing (Email)
 Exporting the recorded data as a CSV and sharing it via an email account specified by the team is the preffered method of sharing data with the MAPS team. 
-how the team wants data shared, efficient ways to manage daata, possible solutions (CSV,google,db) algos
 ```java
 /*
 Function to parse data from ProximityRecord objects into CSV and share via email.
