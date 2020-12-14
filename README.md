@@ -289,8 +289,16 @@ THere is a possibility of the user's device dying during the scan cycle which wo
 CODE
 ### Failure to Connect
 If the devices fail to connect over UUID a self selection can be used to identify the server device. This would basically allow for the user to connect to a device and remember the server device for futher connection. This would specifically be used if the UUID is not functioning correctly in identifying a device.
-
-CODE
-
+```java
+//Search for a BL Device
+if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+    // Create a new device item
+    device.getUuids() //this should retrieve the correct uuids
+    DeviceItem newDevice = new DeviceItem(device.getName(), device.getAddress(), "false");
+    // Add it to our adapter
+    adapter.add(newDevice);
+}
+```
 ## Conclusion
 The implementation for the MAPS Proxmity Tracking application should be constructed as outlined above. This guide can serve as a useful tool for developers tackling this project. Deviations of course will be made in implementing the application for other devices, but the basic outline of background services, BLE server/client communication, and RSSI based proximity estimation should be used.
