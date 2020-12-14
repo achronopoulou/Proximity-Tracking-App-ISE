@@ -172,13 +172,11 @@ public class ProximityServer extends Service {
 
 }
 ```
-implementation of server, supportive materials
 
 ## Client
 The client will be the other device which is actively searching to make a connetion with a server device and request/recieve information regarding RSS. The device that is selected to be the client will follow a cycle of seraching for the server, requesting/recieving RSSI if connected and restarting the cycle for the next iteration. The client can then approximate proximity and share data.
 
 ### Client Implementation
-implementation of client, supportive materials
 ```java
 /*
 Proximty Client Class using Background Service
