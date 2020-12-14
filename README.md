@@ -43,7 +43,7 @@ In a traditional device relationship the Android application would be the client
 The server will advertise its availability to the client over a UUID and wait for a connection before sharing requested materials. This means that the server device will always be open for connection and ready to share information. One user will be using the app as the server and will be waiting for periodic connections to the client to share RSS infromation.
 
 ### Server Implementation
-CODE
+
 ```java
 //Service allows for the server to run in the background of the application
 public class ProximityServer extends Service {
@@ -393,15 +393,12 @@ public void send_proximity_data_via_email() {
 }
 ```
 ## Implementing a Simple User Interface for Key Functionality
-This applications mainly performs background tasks (client-server relationship, proximity approximation, data sharing) which don't require a lot of input from the users. Therefore a simple user-interface will suffice in building and deploying the application. There are a few key requirements in the user interace listed below.
+This applications mainly performs background tasks (client-server relationship, proximity approximation, data sharing) which don't require a lot of input from the users. Therefore a simple user-interface will suffice in building and deploying the application. There are a few key requirements in the user interface listed below. These can easily be implemented using the UI builder in Android Studio which will autogenerate the code for you in the main activity.
 
-* Toggle for Selecting Server vs Client
-* Data Export and Sharing
-* Failure to Connect Selection
+* Toggle for Selecting Server vs Client: Toggle selecting which device will act as the BLE Server and which will act like the BLE Client.
+* Data Export and Sharing: Share button for toggling email function that will export and share data.
+* Failure to Connect Selection: Selection of devices to connect to when searching for BL device.
 
-
-Backend Implementation
-CODE
 ## Robustness
 
 ### Device Dying During Scan Cycles
